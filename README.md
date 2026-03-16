@@ -5,6 +5,7 @@
   <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-18%2B-brightgreen.svg" alt="Node.js 18+"></a>
   <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-compatible-purple.svg" alt="MCP Compatible"></a>
   <a href="https://github.com/sponsors/gregario"><img src="https://img.shields.io/badge/sponsor-%E2%99%A5-ea4aaa.svg" alt="Sponsor"></a>
+  <a href="https://glama.ai/mcp/servers/gregario/astronomy-oracle"><img src="https://glama.ai/mcp/servers/gregario/astronomy-oracle/badges/score.svg" alt="astronomy-oracle MCP server"></a>
 </p>
 
 <p align="center">
