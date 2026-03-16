@@ -1,0 +1,76 @@
+name: Sync OpenNGC
+
+on:
+  schedule:
+    # 1st of every month at 07:00 UTC
+    - cron: "0 7 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - run: npm ci
+
+      - name: Ensure npm supports OIDC
+        run: npm install -g npm@latest
+
+      - name: Fetch latest OpenNGC data
+        run: |
+          curl -s -o data/NGC.csv https://raw.githubusercontent.com/mattiaverga/OpenNGC/master/database_files/NGC.csv
+          curl -s -o data/addendum.csv https://raw.githubusercontent.com/mattiaverga/OpenNGC/master/database_files/addendum.csv
+
+      - name: Check for data changes
+        id: diff
+        run: |
+          if git diff --quiet data/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Data is up to date"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Data has changed:"
+            git diff --stat data/
+          fi
+
+      - name: Build
+        if: steps.diff.outputs.changed == 'true'
+        run: npm run build
+
+      - name: Test
+        if: steps.diff.outputs.changed == 'true'
+        run: npm test
+
+      - name: Commit updated data
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git commit -m "chore: sync OpenNGC data ($(date -u +%Y-%m-%d))"
+          git pull --rebase
+          git push
+
+      - name: Bump version and publish to npm
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          npm version patch --no-git-tag-version
+          npm run build
+          npm publish --access public --provenance
+          # Commit the version bump
+          git add package.json package-lock.json
+          git commit -m "chore: bump version for data sync publish"
+          git pull --rebase
+          git push
