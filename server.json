@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.gregario/astronomy-oracle",
+  "description": "Astronomical catalog data and observing session planner. 13,000+ objects from OpenNGC.",
+  "repository": {
+    "url": "https://github.com/gregario/astronomy-oracle",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "astronomy-oracle",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": []
+    }
+  ]
+}
