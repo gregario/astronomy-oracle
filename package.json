@@ -1,0 +1,43 @@
+{
+  "name": "astronomy-oracle",
+  "version": "0.1.0",
+  "description": "Celestial object catalog and observing session planner MCP server",
+  "mcpName": "io.github.gregario/astronomy-oracle",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gregario/astronomy-oracle.git"
+  },
+  "type": "module",
+  "bin": {
+    "astronomy-oracle": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "data",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && chmod 755 dist/index.js",
+    "dev": "tsx src/index.ts",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12",
+    "zod": "^3.25"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
