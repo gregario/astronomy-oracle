@@ -4,7 +4,7 @@
   "tests_count": 150,
   "npm": { "published": true, "version": "0.1.0" },
   "glama": { "listed": false, "score_badge": false, "ownership_claimed": false },
-  "mcp_registry": { "registered": false, "mcp_name": "io.github.gregario/astronomy-oracle" },
+  "mcp_registry": { "registered": true, "mcp_name": "io.github.gregario/astronomy-oracle" },
   "awesome_mcp_servers": { "pr_submitted": false, "pr_url": null },
   "github": { "release_tag": "v0.1.0", "sponsor_enabled": true },
   "ci": { "oidc_publishing": false, "workflow": null }
