@@ -109,6 +109,15 @@ function parseCsv(content: string): CelestialObject[] {
   return objects;
 }
 
+/** Module-level singleton for shared catalog access. */
+let _catalog: CatalogStore | null = null;
+
+/** Get the shared catalog instance (lazy-loaded singleton). */
+export async function getCatalog(): Promise<CatalogStore> {
+  if (!_catalog) _catalog = await loadCatalog();
+  return _catalog;
+}
+
 /** Load both NGC.csv and addendum.csv, build indexed catalog store. */
 export async function loadCatalog(): Promise<CatalogStore> {
   const dataDir = new URL("../../data/", import.meta.url);

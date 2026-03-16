@@ -23,6 +23,26 @@ describe("parseRA", () => {
   it("returns null for undefined input", () => {
     expect(parseRA(undefined as unknown as string)).toBeNull();
   });
+
+  it("returns null for malformed RA with only two parts", () => {
+    expect(parseRA("12:00")).toBeNull();
+  });
+
+  it("handles RA at boundary 23:59:59.99", () => {
+    const result = parseRA("23:59:59.99");
+    expect(result).toBeDefined();
+    expect(result).toBeCloseTo(360 - 0.0004167, 2); // just under 360
+    expect(result).toBeLessThan(360);
+    expect(result).toBeGreaterThan(359);
+  });
+
+  it("handles RA at zero 00:00:00.00", () => {
+    expect(parseRA("00:00:00.00")).toBeCloseTo(0, 5);
+  });
+
+  it("returns null for non-numeric RA fields", () => {
+    expect(parseRA("ab:cd:ef")).toBeNull();
+  });
 });
 
 describe("parseDec", () => {
@@ -53,5 +73,23 @@ describe("parseDec", () => {
 
   it("returns null for undefined input", () => {
     expect(parseDec(undefined as unknown as string)).toBeNull();
+  });
+
+  it("handles Dec at +90 boundary", () => {
+    const result = parseDec("+90:00:00.0");
+    expect(result).toBeCloseTo(90, 5);
+  });
+
+  it("handles Dec at -90 boundary", () => {
+    const result = parseDec("-90:00:00.0");
+    expect(result).toBeCloseTo(-90, 5);
+  });
+
+  it("returns null for malformed Dec with only two parts", () => {
+    expect(parseDec("+41:16")).toBeNull();
+  });
+
+  it("returns null for non-numeric Dec fields", () => {
+    expect(parseDec("+ab:cd:ef")).toBeNull();
   });
 });

@@ -53,6 +53,20 @@ describe("lookup_object tool", () => {
     expect(output).toContain("No object found");
   });
 
+  it("looks up by common name 'Pleiades' (addendum object)", async () => {
+    const result = await callTool({ name: "Pleiades" });
+    const output = text(result);
+    expect(output).toContain("M45");
+    expect(output).toContain("Pleiades");
+  });
+
+  it("looks up M42 by Messier number", async () => {
+    const result = await callTool({ name: "M42" });
+    const output = text(result);
+    expect(output).toContain("Orion Nebula");
+    expect(output).toContain("NGC1976");
+  });
+
   it("includes visibility when lat/lon/date provided", async () => {
     const result = await callTool({
       name: "M31",

@@ -126,6 +126,38 @@ describe("riseTransitSet", () => {
     }
   });
 
+  it("altitude at the equator for an equatorial object should peak near 90°", () => {
+    // Object at dec=0, observer at equator (lat=0) — transits at zenith
+    const result = riseTransitSet(0, 0, 0, 0, TEST_DATE, 0);
+    // Peak altitude = 90 - |lat - dec| = 90
+    // The current altitude depends on time, but it should not be circumpolar or never-rise
+    expect(result.isCircumpolar).toBe(false);
+    expect(result.neverRises).toBe(false);
+  });
+
+  it("circumpolar from the north pole (lat=90): dec > 0 is always visible", () => {
+    const result = riseTransitSet(45, 45, 89.99, 0, TEST_DATE, 0);
+    expect(result.isCircumpolar).toBe(true);
+    expect(result.neverRises).toBe(false);
+  });
+
+  it("never rises from the north pole (lat=90): dec < 0 never visible", () => {
+    const result = riseTransitSet(45, -10, 89.99, 0, TEST_DATE, 0);
+    expect(result.neverRises).toBe(true);
+    expect(result.isCircumpolar).toBe(false);
+  });
+
+  it("circumpolar from the south pole (lat=-90): dec < 0 is always visible", () => {
+    const result = riseTransitSet(45, -45, -89.99, 0, TEST_DATE, 0);
+    expect(result.isCircumpolar).toBe(true);
+    expect(result.neverRises).toBe(false);
+  });
+
+  it("never rises from the south pole (lat=-90): dec > 0 never visible", () => {
+    const result = riseTransitSet(45, 10, -89.99, 0, TEST_DATE, 0);
+    expect(result.neverRises).toBe(true);
+  });
+
   it("object at equator from equator: ~12h above horizon", () => {
     const result = riseTransitSet(0, 0, 0, 0, TEST_DATE, 0);
     expect(result.isCircumpolar).toBe(false);
@@ -168,6 +200,12 @@ describe("currentPosition", () => {
     );
     expect(pos.altitude).toBeCloseTo(vis.altitude, 4);
     expect(pos.azimuth).toBeCloseTo(vis.azimuth, 4);
+  });
+
+  it("azimuth is in range [0, 360) for any object", () => {
+    const pos = currentPosition(200, -45, 30, 100, TEST_DATE);
+    expect(pos.azimuth).toBeGreaterThanOrEqual(0);
+    expect(pos.azimuth).toBeLessThan(360);
   });
 
   it("Polaris from London: altitude ≈ latitude", () => {

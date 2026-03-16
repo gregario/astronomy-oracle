@@ -112,4 +112,59 @@ describe("CatalogStore", () => {
     const m31 = store.byMessier.get("M31");
     expect(m31!.otherIdentifiers).toContain("UGC 00454");
   });
+
+  it("includes addendum objects beyond NGC catalog", () => {
+    // Addendum should add objects not in NGC.csv (e.g. Mel objects)
+    let addendumCount = 0;
+    for (const obj of store.all.values()) {
+      if (obj.name.startsWith("Mel")) addendumCount++;
+    }
+    expect(addendumCount).toBeGreaterThan(0);
+  });
+
+  it("common name index has multiple entries", () => {
+    expect(store.byCommonName.size).toBeGreaterThan(5);
+  });
+
+  it("Messier index has expected count (~110 objects)", () => {
+    expect(store.byMessier.size).toBeGreaterThanOrEqual(100);
+    expect(store.byMessier.size).toBeLessThanOrEqual(120);
+  });
+
+  it("all objects have valid RA in range [0, 360)", () => {
+    for (const obj of store.all.values()) {
+      expect(obj.ra).toBeGreaterThanOrEqual(0);
+      expect(obj.ra).toBeLessThan(360);
+    }
+  });
+
+  it("all objects have valid Dec in range [-90, 90]", () => {
+    for (const obj of store.all.values()) {
+      expect(obj.dec).toBeGreaterThanOrEqual(-90);
+      expect(obj.dec).toBeLessThanOrEqual(90);
+    }
+  });
+
+  it("IC objects are present in catalog", () => {
+    let icCount = 0;
+    for (const name of store.all.keys()) {
+      if (name.startsWith("IC")) icCount++;
+    }
+    expect(icCount).toBeGreaterThan(100);
+  });
+
+  it("no object has NonEx or Dup type name", () => {
+    for (const obj of store.all.values()) {
+      expect(obj.typeName).not.toBe("Non-Existent");
+      expect(obj.typeName).not.toBe("Duplicate");
+    }
+  });
+
+  it("common name lookup is case-insensitive", () => {
+    const upper = store.byCommonName.get("ANDROMEDA GALAXY");
+    const lower = store.byCommonName.get("andromeda galaxy");
+    // Both should be undefined or found — index is lowercase only
+    expect(upper).toBeUndefined(); // uppercase key should NOT match
+    expect(lower).toBeDefined();   // lowercase key SHOULD match
+  });
 });

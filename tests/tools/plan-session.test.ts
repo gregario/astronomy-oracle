@@ -48,8 +48,10 @@ describe("plan_session tool", () => {
       date: "2025-03-20",
     });
     const output = text(result);
-    expect(output).toContain("40.7");
-    expect(output).toContain("-74");
+    expect(output).toContain("40.70");
+    expect(output).toContain("N");
+    expect(output).toContain("74.00");
+    expect(output).toContain("W");
     expect(output).toContain("2025-03-20");
   });
 
@@ -98,6 +100,35 @@ describe("plan_session tool", () => {
     if (!output.includes("No notable objects")) {
       expect(output).toContain("Galaxy");
     }
+  });
+
+  it("types filter only includes specified types", async () => {
+    const result = await callTool({
+      latitude: 51.5,
+      longitude: -0.1,
+      date: "2025-01-15",
+      types: ["PN"],
+    });
+    const output = text(result);
+    expect(output).toContain("Observing Session Plan");
+    // If there are objects, they should be planetary nebulae
+    if (!output.includes("No notable objects")) {
+      expect(output).toContain("Planetary Nebula");
+      expect(output).not.toContain("Galaxy");
+      expect(output).not.toContain("Open Cluster");
+    }
+  });
+
+  it("southern hemisphere location works", async () => {
+    const result = await callTool({
+      latitude: -33.9,
+      longitude: 18.4,
+      date: "2025-06-15",
+    });
+    const output = text(result);
+    expect(output).toContain("Observing Session Plan");
+    expect(output).toContain("33.90");
+    expect(output).toContain("S");
   });
 
   it("defaults to today when no date provided", async () => {

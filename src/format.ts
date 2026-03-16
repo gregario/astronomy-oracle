@@ -194,7 +194,7 @@ export function formatSessionPlan(
   lines.push("# Observing Session Plan");
   lines.push("");
   lines.push(
-    `**Location:** ${location.lat}° N, ${location.lon}° E  `
+    `**Location:** ${Math.abs(location.lat).toFixed(2)}°${location.lat >= 0 ? "N" : "S"}, ${Math.abs(location.lon).toFixed(2)}°${location.lon >= 0 ? "E" : "W"}  `
   );
   lines.push(
     `**Date:** ${date.toISOString().slice(0, 10)}`

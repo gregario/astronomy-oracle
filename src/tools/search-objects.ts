@@ -4,20 +4,13 @@
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { loadCatalog, type CatalogStore } from "../data/catalog.js";
+import { getCatalog } from "../data/catalog.js";
 import { OBJECT_TYPES, type ObjectTypeCode } from "../types.js";
 import { formatSearchResults } from "../format.js";
 
-let catalog: CatalogStore | null = null;
-
-async function getCatalog(): Promise<CatalogStore> {
-  if (!catalog) {
-    catalog = await loadCatalog();
-  }
-  return catalog;
-}
-
-const typeKeys = Object.keys(OBJECT_TYPES) as [string, ...string[]];
+const typeKeys = Object.keys(OBJECT_TYPES).filter(
+  (k) => k !== "NonEx" && k !== "Dup",
+) as [string, ...string[]];
 
 export function registerSearchObjects(server: McpServer): void {
   server.tool(

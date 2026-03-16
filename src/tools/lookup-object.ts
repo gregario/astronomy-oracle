@@ -4,19 +4,10 @@
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { loadCatalog, type CatalogStore } from "../data/catalog.js";
+import { getCatalog, type CatalogStore } from "../data/catalog.js";
 import { fuzzySearch } from "../lib/search.js";
 import { riseTransitSet } from "../astro/visibility.js";
 import { formatObject } from "../format.js";
-
-let catalog: CatalogStore | null = null;
-
-async function getCatalog(): Promise<CatalogStore> {
-  if (!catalog) {
-    catalog = await loadCatalog();
-  }
-  return catalog;
-}
 
 function findObject(
   store: CatalogStore,

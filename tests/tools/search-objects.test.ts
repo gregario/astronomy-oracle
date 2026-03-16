@@ -73,6 +73,20 @@ describe("search_objects tool", () => {
     expect(output).toContain("And");
   });
 
+  it("filters by minSize", async () => {
+    const result = await callTool({ minSize: 100 });
+    const output = text(result);
+    expect(output).toContain("Found");
+    // Should only have large objects
+    expect(output).not.toContain("No objects found");
+  });
+
+  it("filters by minMagnitude (brightest cutoff)", async () => {
+    const result = await callTool({ minMagnitude: 8.0, maxMagnitude: 9.0, limit: 5 });
+    const output = text(result);
+    expect(output).toContain("Found");
+  });
+
   it("returns no results message for impossible filter", async () => {
     const result = await callTool({
       constellation: "ZZZFAKE",
