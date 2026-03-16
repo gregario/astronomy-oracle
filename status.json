@@ -7,5 +7,5 @@
   "mcp_registry": { "registered": true, "mcp_name": "io.github.gregario/astronomy-oracle" },
   "awesome_mcp_servers": { "pr_submitted": true, "pr_url": "https://github.com/punkpeye/awesome-mcp-servers/pull/3311" },
   "github": { "release_tag": "v0.1.0", "sponsor_enabled": true },
-  "ci": { "oidc_publishing": true, "workflow": "publish.yml" }
+  "ci": { "oidc_publishing": true, "workflow": "sync-data.yml" }
 }
