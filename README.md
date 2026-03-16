@@ -11,6 +11,8 @@
 
 Accurate astronomical catalog data and observing session planner for LLM assistants. Stops hallucinated magnitudes, coordinates, and visibility.
 
+[![astronomy-oracle MCP server](https://glama.ai/mcp/servers/gregario/astronomy-oracle/badges/card.svg)](https://glama.ai/mcp/servers/gregario/astronomy-oracle)
+
 ## Features
 
 - **3 tools** for object lookup, catalog search, and observing session planning
