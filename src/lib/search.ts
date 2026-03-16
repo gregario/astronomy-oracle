@@ -8,7 +8,7 @@
  * Returns all items if query is empty.
  * Safely skips null/undefined field values.
  */
-export function fuzzySearch<T extends Record<string, unknown>>(
+export function fuzzySearch<T extends object>(
   items: T[],
   query: string,
   fields: (keyof T & string)[],
