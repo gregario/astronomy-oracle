@@ -7,6 +7,10 @@
   <a href="https://github.com/sponsors/gregario"><img src="https://img.shields.io/badge/sponsor-%E2%99%A5-ea4aaa.svg" alt="Sponsor"></a>
 </p>
 
+<p align="center">
+  <a href="https://glama.ai/mcp/servers/gregario/astronomy-oracle"><img src="https://glama.ai/mcp/servers/gregario/astronomy-oracle/badges/card.svg" alt="astronomy-oracle MCP server"></a>
+</p>
+
 # Astronomy Oracle
 
 Accurate astronomical catalog data and observing session planner for LLM assistants. Stops hallucinated magnitudes, coordinates, and visibility.
