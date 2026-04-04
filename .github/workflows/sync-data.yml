@@ -25,9 +25,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Ensure npm supports OIDC
-        run: npm install -g npm@latest
-
       - name: Fetch latest OpenNGC data
         run: |
           curl -s -o data/NGC.csv https://raw.githubusercontent.com/mattiaverga/OpenNGC/master/database_files/NGC.csv
