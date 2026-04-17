@@ -16,6 +16,10 @@
 
 Accurate astronomical catalog data and observing session planner for LLM assistants. Stops hallucinated magnitudes, coordinates, and visibility.
 
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/gregario-astronomy-oracle).
+
 ## Features
 
 - **3 tools** for object lookup, catalog search, and observing session planning
