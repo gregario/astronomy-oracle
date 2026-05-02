@@ -5,7 +5,11 @@
   "mcpName": "io.github.gregario/astronomy-oracle",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gregario/astronomy-oracle.git"
+    "url": "git+https://github.com/gregario/astronomy-oracle.git"
+  },
+  "homepage": "https://github.com/gregario/astronomy-oracle#readme",
+  "bugs": {
+    "url": "https://github.com/gregario/astronomy-oracle/issues"
   },
   "type": "module",
   "bin": {
