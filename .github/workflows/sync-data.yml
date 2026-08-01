@@ -98,7 +98,7 @@ jobs:
 
           # OIDC ONLY: bump npm to support OIDC trusted publishing (>= 11.5.1).
           # Drop this line if using NPM_TOKEN.
-          npm install -g npm@latest
+          npm install -g npm@11
 
           npm publish --access public --provenance
 
