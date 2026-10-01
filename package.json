@@ -1,6 +1,6 @@
 {
   "name": "astronomy-oracle",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Celestial object catalog and observing session planner MCP server",
   "mcpName": "io.github.gregario/astronomy-oracle",
   "repository": {

@@ -1,10 +1,10 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "tools_count": 3,
   "tests_count": 150,
   "npm": {
     "published": true,
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "glama": {
     "listed": true,
@@ -20,7 +20,7 @@
     "pr_url": "https://github.com/punkpeye/awesome-mcp-servers/pull/3311"
   },
   "github": {
-    "release_tag": "v0.1.1",
+    "release_tag": "v0.1.2",
     "sponsor_enabled": true
   },
   "ci": {
