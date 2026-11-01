@@ -6,12 +6,12 @@
     "url": "https://github.com/gregario/astronomy-oracle",
     "source": "github"
   },
-  "version": "0.1.2",
+  "version": "0.1.3",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "astronomy-oracle",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "transport": {
         "type": "stdio"
       },
